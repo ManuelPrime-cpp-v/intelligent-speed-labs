@@ -1,0 +1,40 @@
+name: C/C++ Build & Benchmark CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  compile-and-verify:
+    name: Build & Verify C/C++ Experiments
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install GCC/G++ Toolchains
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      - name: Compile All C Programs (-O2 & -O3)
+        run: |
+          mkdir -p build
+          find . -name "*.c" -not -path "./build/*" | while read -r file; do
+            echo "Compiling C source: $file"
+            gcc -std=c17 -O2 -Wall -Wextra "$file" -o "build/$(basename "${file%.c}")_O2"
+            gcc -std=c17 -O3 -Wall -Wextra "$file" -o "build/$(basename "${file%.c}")_O3"
+          done
+
+      - name: Compile All C++ Programs (-O2 & -O3)
+        run: |
+          mkdir -p build
+          find . -name "*.cpp" -not -path "./build/*" | while read -r file; do
+            echo "Compiling C++ source: $file"
+            g++ -std=c++20 -O2 -Wall -Wextra "$file" -o "build/$(basename "${file%.cpp}")_O2"
+            g++ -std=c++20 -O3 -Wall -Wextra "$file" -o "build/$(basename "${file%.cpp}")_O3"
+          done

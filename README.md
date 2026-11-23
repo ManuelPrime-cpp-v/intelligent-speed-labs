@@ -1,39 +1,27 @@
-# intelligent-speed-labs
-Empirical systems experiments, memory hierarchy benchmarks, and low-level C/C++ performance investigations.
 # INTELLIGENT SPEED LABS
 
 > *"Measure. Understand. Optimize."* — **RAVENSBJORN**
 
-An empirical engineering laboratory dedicated to investigating how computation behaves across software, compilers, memory hierarchies, and hardware architectures. 
+A practical repository for hands-on experiments in **C**, **C++**, and **Python** focused on understanding how code interacts with memory, data structures, and compiler optimizations.
 
-Rather than treating performance as guesswork, every experiment in this repository isolates a specific computational bottleneck, measures its baseline behavior, analyzes the underlying machine mechanics, and documents the resulting optimization.
-
----
-
-## Repository Architecture
-
-| Directory | Domain | Focus Areas |
-| :--- | :--- | :--- |
-| **`01-memory-and-cache/`** | Memory Systems | Cache line alignment, spatial/temporal locality, false sharing, and bandwidth limits |
-| **`02-cpp-low-latency/`** | Systems C / C++ | Data-oriented design, branch prediction, SIMD intrinsics, and zero-overhead abstractions |
-| **`03-hardware-and-fpga/`** | Architecture & Logic | Digital logic modules, `Verilog` / `SystemVerilog` designs, and hardware-software co-design |
-| **`04-profiling-notes/`** | Telemetry & Analysis | Assembly inspection, `perf` counter breakdowns, and compiler optimization logs (`-O0` vs `-O3`) |
+Rather than guessing what makes code fast, each experiment isolates a specific programming concept, benchmarks different approaches, and documents the measured difference.
 
 ---
 
-## Experimental Methodology
+## Repository Structure
 
-Every benchmark and systems study follows a strict four-stage protocol:
-
-1. **Hypothesis:** Define the expected architectural behavior or bottleneck.
-2. **Baseline Measurement:** Capture deterministic latency, throughput, and cache-miss telemetry.
-3. **Root-Cause Inspection:** Examine generated assembly, memory layout, or hardware utilization.
-4. **Targeted Optimization:** Apply minimal, architecture-aligned changes and verify the delta.
+| Directory | Purpose |
+| :--- | :--- |
+| **`benchmarks/`** | Small C/C++ programs comparing execution speed across different access patterns and implementations. |
+| **`data-structures/`** | From-scratch implementations of core data structures tested for memory usage and lookup speed. |
+| **`compiler-flags/`** | Experiments comparing how optimization levels (`-O0`, `-O2`, `-O3`) affect runtime and binary size. |
+| **`scripts/`** | Python helper scripts for automating benchmark runs and summarizing timing results. |
 
 ---
 
-## Build & Run Environment
+## Workflow
 
-* **Languages:** `C17` · `C++20` · `Python` · `SystemVerilog`
-* **Compilers & Tooling:** `gcc` / `clang` · `CMake` · `perf` · `valgrind` · `objdump`
-* **OS:** Linux (Arch / CachyOS)
+1. **Write a clean baseline** implementation in C or C++.
+2. **Measure execution time** using standard timing utilities (`<chrono>`, `time`, or Python runners).
+3. **Test an alternative approach** (e.g., contiguous memory layout, reduced allocations, or compiler flags).
+4. **Document the results** clearly alongside the source code.

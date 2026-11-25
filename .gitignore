@@ -1,0 +1,14 @@
+# Ignore compiled binaries and build directories
+build/
+*.out
+*.exe
+*.o
+*.obj
+
+# Ignore extensionless compiled Linux binaries inside benchmarks/ and data-structures/
+benchmarks/**/*
+!benchmarks/**/*.*
+data-structures/**/*
+!data-structures/**/*.*
+compiler-flags/**/*
+!compiler-flags/**/*.*
